@@ -2,8 +2,8 @@
 #define CONSOLEIO_H
 
 void printMenu();
-int getValidInt(const char* prompt, int min. int max);
+int getValidInt(const char* prompt, int min, int max);
 float getValidFloat(const char* prompt, float min);
-void getString(const char* prompt, char* buffer, int maxLenght);
+void getString(const char* prompt, char* buffer, int maxLength);
 
 #endif

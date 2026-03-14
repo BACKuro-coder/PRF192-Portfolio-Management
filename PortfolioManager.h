@@ -1,19 +1,24 @@
 #ifndef PORTFOLIOMANAGER_H
 #define PORTFOLIOMANAGER_H
+
 #include "DataTypes.h"
 
-//manage status system
+// Biến toàn cục
 extern Developer* devList;
 extern int devCount;
 extern Project* projectList;
-ectern int projectCount;
+extern int projectCount;
 
-//implement functional 
-void innitSystem();
-void freeSystem();// avoid memory leak
+// Khai báo tên hàm (Không có ruột code ở đây)
+void initSystem();
+void freeSystem(); 
+
+
+//---For Developer---
 void addDeveloper();
-void searchDeveloper();
-void assignProject();
-void sortDevelopersBySalary();
+void searchDeveloperByID();
+void searchDeveloperByName();
+void updateDeveloperSalary();
+void removeDeveloper();
 
 #endif

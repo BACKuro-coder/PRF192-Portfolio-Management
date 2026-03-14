@@ -1,7 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include "PortfolioManager.h"
-
+#include "ConsoleIO.h"        // Thêm dòng này để máy nhận diện printMenu và getValidInt
 /* run this program using the console pauser or add your own getch, system("pause") or input loop */
 
 int main(int argc, char *argv[]) {
