@@ -1,22 +1,22 @@
 #ifndef DATATYPES_H
 #define DATATYPES_H
+#include <stdio.h>
+#include <string.h>
 
-// Struct quản lý Developer
+#define MAX 100
+
 typedef struct {
-    char devID[10];       // DEVxxx
-    char fullName[50];    // min 2 words
-    int birthYear;        // Đã sửa lỗi chính tả ở đây
-    char languages[100];
-    float salary;         // min $1000
+    char devID[10];
+    char fullName[50];
+    int projectCount;
 } Developer;
 
-// Struct quản lý Project
 typedef struct {
     char projectID[10];
-    char devID[10];       // must exist in Developer Array
+    char devID[10];
     char projectName[100];
-    int duration;         // in months
-    char startDate[15];
+    int duration;
+    char startDate[20];
+    int status;
 } Project;
-
 #endif
