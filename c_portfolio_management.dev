@@ -121,7 +121,7 @@ OverrideBuildCmd=0
 BuildCmd=
 
 [Unit8]
-FileName=ProtfolioManager.c
+FileName=PortfolioManager.h
 CompileCpp=0
 Folder=
 Compile=1
@@ -131,7 +131,7 @@ OverrideBuildCmd=0
 BuildCmd=
 
 [Unit9]
-FileName=PortfolioManager.h
+FileName=PortfolioManager.c
 CompileCpp=0
 Folder=
 Compile=1

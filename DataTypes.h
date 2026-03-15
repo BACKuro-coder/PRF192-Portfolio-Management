@@ -1,6 +1,5 @@
 #ifndef DATATYPES_H
 #define DATATYPES_H
-
 #include <stdio.h>
 #include <string.h>
 
@@ -20,5 +19,4 @@ typedef struct {
     char startDate[20];
     int status;
 } Project;
-
 #endif
