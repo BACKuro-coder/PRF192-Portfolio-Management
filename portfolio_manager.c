@@ -2,9 +2,9 @@
 #include <stdlib.h>
 #include <string.h>
 #include <ctype.h>
-#include "DataTypes.h"
-#include "ConsoleIO.h"
-#include "PortfolioManager.h"
+#include "data_types.h"
+#include "console_io.h"
+#include "portfolio_manager.h"
 
 // Cấp phát biến toàn cục
 Developer* devList = NULL;

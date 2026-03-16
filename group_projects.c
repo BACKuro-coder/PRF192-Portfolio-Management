@@ -1,4 +1,4 @@
-#include "GroupProjects.h"
+#include "group_projects.h"
 void groupProjectsByDeveloper(Project projectList[], int projectCount,
                               Developer developerList[], int developerCount) {
 

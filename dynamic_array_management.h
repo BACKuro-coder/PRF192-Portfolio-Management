@@ -1,7 +1,7 @@
 #ifndef DYNAMICARRAY_H
 #define DYNAMICARRAY_H
 
-#include "Struct Developer.h"
+#include "struct_developer.h"
 
 void resizeArray();
 

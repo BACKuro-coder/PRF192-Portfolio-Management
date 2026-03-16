@@ -4,8 +4,8 @@
 CPP      = g++.exe
 CC       = gcc.exe
 WINDRES  = windres.exe
-OBJ      = main.o ConsoleIO.o DataTypes.o FileHelper.o PortfolioManager.o
-LINKOBJ  = main.o ConsoleIO.o DataTypes.o FileHelper.o PortfolioManager.o
+OBJ      = main.o console_io.o data_types.o file_helper.o portfolio_manager.o
+LINKOBJ  = main.o console_io.o data_types.o file_helper.o portfolio_manager.o
 LIBS     = -L"C:/Program Files (x86)/Embarcadero/Dev-Cpp/TDM-GCC-64/lib" -L"C:/Program Files (x86)/Embarcadero/Dev-Cpp/TDM-GCC-64/x86_64-w64-mingw32/lib" -static-libgcc
 INCS     = -I"C:/Program Files (x86)/Embarcadero/Dev-Cpp/TDM-GCC-64/include" -I"C:/Program Files (x86)/Embarcadero/Dev-Cpp/TDM-GCC-64/x86_64-w64-mingw32/include" -I"C:/Program Files (x86)/Embarcadero/Dev-Cpp/TDM-GCC-64/lib/gcc/x86_64-w64-mingw32/9.2.0/include"
 CXXINCS  = -I"C:/Program Files (x86)/Embarcadero/Dev-Cpp/TDM-GCC-64/include" -I"C:/Program Files (x86)/Embarcadero/Dev-Cpp/TDM-GCC-64/x86_64-w64-mingw32/include" -I"C:/Program Files (x86)/Embarcadero/Dev-Cpp/TDM-GCC-64/lib/gcc/x86_64-w64-mingw32/9.2.0/include" -I"C:/Program Files (x86)/Embarcadero/Dev-Cpp/TDM-GCC-64/lib/gcc/x86_64-w64-mingw32/9.2.0/include/c++"
@@ -27,14 +27,15 @@ $(BIN): $(OBJ)
 main.o: main.c
 	$(CC) -c main.c -o main.o $(CFLAGS)
 
-ConsoleIO.o: ConsoleIO.c
-	$(CC) -c ConsoleIO.c -o ConsoleIO.o $(CFLAGS)
+console_io.o: console_io.c
+	$(CC) -c console_io.c -o console_io.o $(CFLAGS)
 
-DataTypes.o: DataTypes.c
-	$(CC) -c DataTypes.c -o DataTypes.o $(CFLAGS)
+data_types.o: data_types.c
+	$(CC) -c data_types.c -o data_types.o $(CFLAGS)
 
-FileHelper.o: FileHelper.c
-	$(CC) -c FileHelper.c -o FileHelper.o $(CFLAGS)
+file_helper.o: file_helper.c
+	$(CC) -c file_helper.c -o file_helper.o $(CFLAGS)
 
-PortfolioManager.o: PortfolioManager.c
-	$(CC) -c PortfolioManager.c -o PortfolioManager.o $(CFLAGS)
+portfolio_manager.o: portfolio_manager.c
+	$(CC) -c portfolio_manager.c -o portfolio_manager.o $(CFLAGS)
+

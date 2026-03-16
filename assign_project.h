@@ -1,7 +1,7 @@
 #ifndef ASSIGNPROJECT_H
 #define ASSIGNPROJECT_H
 
-#include "DataTypes.h"
+#include "data_types.h"
 int assignProjectToDeveloper(Project projectList[], int *projectCount,
                              Developer developerList[], int developerCount);
 

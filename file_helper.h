@@ -1,6 +1,6 @@
 #ifndef FILEHELPER_H
 #define FILEHELPER_H
-#include "DataTypes.h"
+#include "data_types.h"
 
 int loadDevelopersFromFile(const char* filename, Developer** devs, int* count);
 int saveDevelopersToFile(const char* filename, Developer* devs, int count);

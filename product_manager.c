@@ -1,4 +1,4 @@
-#include "Product.h"
+#include "product.h"
 
 void initManager(ProductManager *pm, int initialCapacity) {
     pm->capacity = initialCapacity;
