@@ -6,12 +6,14 @@
 #include "console_io.h"
 #include "portfolio_manager.h"
 #include "file_helper.h"
+#include "product.h"
 
 // Cap phat bien toan cuc
 Developer* devList = NULL;
 int devCount = 0;
 Project* projectList = NULL;
 int projectCount = 0;
+ProductManager productMgr;
 
 // Khoi tao he thong: doc du lieu tu file khi chuong trinh bat dau
 void initSystem() {
@@ -28,6 +30,14 @@ void initSystem() {
     } else {
         printf("No existing project data found. Starting fresh.\n");
     }
+    
+    // Khoi tao Product Manager
+    initManager(&productMgr, 10);
+    if (loadProductFromFile(&productMgr, "products.csv")) {
+        printf("Loaded %d product(s) from file.\n", productMgr.count);
+    } else {
+        printf("No existing product data found. Starting fresh.\n");
+    }
 }
 
 // Giai phong toan bo bo nho dong truoc khi thoat
@@ -39,6 +49,10 @@ void freeSystem() {
     if (projectList != NULL) {
         free(projectList);
         projectList = NULL;   // Gan NULL sau khi free
+    }
+    if (productMgr.products != NULL) {
+        free(productMgr.products);
+        productMgr.products = NULL;
     }
 }
 
@@ -249,92 +263,6 @@ void removeDeveloper() {
         devList = NULL;
     }
 
+
     printf("Developer removed successfully.\n");
-}
-
-// ================= HAM ASSIGN PROJECT =================
-// Gan project cho developer: validate Project ID unique + Developer ID ton tai
-void assignProject() {
-    if (devCount == 0) {
-        printf("The developer list is empty. Please add a developer first.\n");
-        return;
-    }
-    
-    printf("\n--- Assign Project to Developer ---\n");
-    
-    // Cap phat them bo nho cho 1 project moi
-    Project* temp = realloc(projectList, (projectCount + 1) * sizeof(Project));
-    if (temp == NULL) {
-        printf("Error: Memory allocation failed!\n");
-        return;
-    }
-    projectList = temp;
-    
-    // Nhap va validate Project ID - phai la duy nhat
-    do {
-        getString("Enter Project ID: ", projectList[projectCount].projectID, 10);
-        if (isDuplicateProjectID(projectList[projectCount].projectID)) {
-            printf("Error: Project ID '%s' already exists. Please enter a unique ID.\n", 
-                   projectList[projectCount].projectID);
-        } else {
-            break;
-        }
-    } while (1);
-    
-    // Nhap va validate Developer ID - phai ton tai trong danh sach
-    int devIndex = -1;
-    do {
-        getString("Enter Developer ID (must exist): ", projectList[projectCount].devID, 10);
-        // Tim developer trong danh sach
-        for (int i = 0; i < devCount; i++) {
-            if (strcmp(devList[i].devID, projectList[projectCount].devID) == 0) {
-                devIndex = i;
-                break;
-            }
-        }
-        if (devIndex == -1) {
-            printf("Error: Developer ID '%s' not found. Please enter a valid Developer ID.\n", 
-                   projectList[projectCount].devID);
-        }
-    } while (devIndex == -1);
-    
-    // Nhap thong tin project
-    getString("Enter Project Name: ", projectList[projectCount].projectName, 100);
-    projectList[projectCount].duration = getValidInt("Enter Duration (months, 1-120): ", 1, 120);
-    getString("Enter Start Date (dd/mm/yyyy): ", projectList[projectCount].startDate, 20);
-    projectList[projectCount].status = getValidInt("Enter Status (1: Active, 0: Completed): ", 0, 1);
-    
-    // Tang so project cua developer tuong ung
-    devList[devIndex].projectCount++;
-    
-    projectCount++;
-    printf("Project assigned successfully to %s!\n", devList[devIndex].fullName);
-}
-
-// ================= HAM SORT DEVELOPERS BY SALARY =================
-// Sap xep Developer theo luong giam dan bang Bubble Sort
-void sortDevelopersBySalary() {
-    if (devCount == 0) {
-        printf("The developer list is empty.\n");
-        return;
-    }
-    
-    // Bubble Sort giam dan theo salary
-    for (int i = 0; i < devCount - 1; i++) {
-        for (int j = 0; j < devCount - i - 1; j++) {
-            if (devList[j].salary < devList[j + 1].salary) {
-                // Hoan doi 2 phan tu
-                Developer temp = devList[j];
-                devList[j] = devList[j + 1];
-                devList[j + 1] = temp;
-            }
-        }
-    }
-    
-    // In ket qua sau khi sap xep
-    printf("\n--- Developers Sorted by Salary (Descending) ---\n");
-    for (int i = 0; i < devCount; i++) {
-        printf("%d. ID: %s | Name: %s | Salary: $%.2f\n",
-               i + 1, devList[i].devID, devList[i].fullName, devList[i].salary);
-    }
 }

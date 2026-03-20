@@ -2,25 +2,32 @@
 #define PORTFOLIOMANAGER_H
 
 #include "data_types.h"
+#include "product.h"
 
-// Bien toan cuc
+// Bien toan cuc - Developer & Project
 extern Developer* devList;
 extern int devCount;
 extern Project* projectList;
 extern int projectCount;
 
-// Khai bao ten ham (Khong co ruot code o day)
+// Bien toan cuc - Product
+extern ProductManager productMgr;
+
+// He thong
 void initSystem();
 void freeSystem(); 
 
-//---For Developer---
+// Validation functions (dung chung cho nhieu file)
+int isValidDevID(const char* id);
+int isDuplicateDevID(const char* id);
+int isValidName(const char* name);
+int isDuplicateProjectID(const char* id);
+int isExistingDevID(const char* id);
+
+// Developer CRUD
 void addDeveloper();
-void searchDeveloper();          // Tim Developer theo ID hoac Ten
+void searchDeveloper();
 void updateDeveloperSalary();
 void removeDeveloper();
-void sortDevelopersBySalary();   // Sap xep Developer theo luong giam dan
-
-//---For Project---
-void assignProject();            // Gan project cho developer
 
 #endif

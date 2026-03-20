@@ -54,4 +54,13 @@ dkms.conf
 # debug information files
 *.dwo
 
-REQUIREMENTS.md
+*.md
+
+# Test files (do not push to GitHub)
+test_all.c
+test_all.exe
+test_product.c
+test_new_features.c
+test_helpers.h
+_test_*.dat
+_test_*.csv

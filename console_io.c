@@ -4,13 +4,23 @@
 #include "console_io.h"
 
 void printMenu() {
-    printf("\n==== DEVELOPER & PROJECT PORTFOLIO MANAGEMENT ====\n");
-    printf("1. Add a new Developer\n");
-    printf("2. Search Developer\n");
-    printf("3. Assign Project to Developer\n");
-    printf("4. Sort Developers by Salary\n");
-    printf("5. Save and Exit\n");
-    printf("==================================================\n");
+    printf("\n========= DEVELOPER & PROJECT PORTFOLIO MANAGEMENT =========\n");
+    printf("  --- Developer ---\n");
+    printf("  1. Add a new Developer\n");
+    printf("  2. Search Developer\n");
+    printf("  3. Update Developer Salary\n");
+    printf("  4. Remove Developer\n");
+    printf("  5. Show All Developers\n");
+    printf("  6. Sort Developers by Salary\n");
+    printf("  --- Project ---\n");
+    printf("  7. Assign Project to Developer\n");
+    printf("  8. Calculate Total Experience\n");
+    printf("  9. Group Projects by Developer\n");
+    printf("  --- Product ---\n");
+    printf(" 10. Product Management\n");
+    printf("  --- System ---\n");
+    printf("  0. Save and Exit\n");
+    printf("=============================================================\n");
 }
 
 void getString(const char* prompt, char* buffer, int maxLength) {

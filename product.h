@@ -20,4 +20,14 @@ typedef struct {
     int capacity;
 } ProductManager;
 
+// Function prototypes
+void initManager(ProductManager *pm, int initialCapacity);
+int addProduct(ProductManager *pm, const char *name, double price, int quantity, const char *category);
+int updateProduct(ProductManager *pm, int searchId, double newPrice, int newQuantity);
+int deleteProduct(ProductManager *pm, int searchId);
+void searchProduct(ProductManager *pm, const char *keyword);
+void sortProduct(ProductManager *pm);
+int loadProductFromFile(ProductManager *pm, const char *filename);
+int saveProductToFile(ProductManager *pm, const char *filename);
+
 #endif
