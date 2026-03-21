@@ -6,12 +6,12 @@
 #include <string.h>
 
 typedef struct {
-    int id;
-    char name[100];
-    double price;
-    int quantity;
-    char category[50];
-    int status;
+    int id;              // Ma Product, tu dong tang (1, 2, 3...)
+    char name[100];      // Ten phan mem (VD: "Portfolio Manager")
+    char devID[10];      // Developer phu trach (VD: "DEV001")
+    char version[20];    // Phien ban (VD: "1.0.0")
+    char platform[50];   // Nen tang (VD: "Web", "Mobile", "Desktop")
+    int status;          // 1 = Active, 0 = Discontinued
 } Product;
 
 typedef struct {
@@ -22,8 +22,8 @@ typedef struct {
 
 // Function prototypes
 void initManager(ProductManager *pm, int initialCapacity);
-int addProduct(ProductManager *pm, const char *name, double price, int quantity, const char *category);
-int updateProduct(ProductManager *pm, int searchId, double newPrice, int newQuantity);
+int addProduct(ProductManager *pm, const char *name, const char *devID, const char *version, const char *platform);
+int updateProduct(ProductManager *pm, int searchId, const char *newVersion, const char *newPlatform);
 int deleteProduct(ProductManager *pm, int searchId);
 void searchProduct(ProductManager *pm, const char *keyword);
 void sortProduct(ProductManager *pm);

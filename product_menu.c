@@ -10,29 +10,40 @@
 void productMenu() {
     int choice;
     do {
-        printf("\n--- PRODUCT MANAGEMENT ---\n");
+        printf("\n--- SOFTWARE PRODUCT MANAGEMENT ---\n");
         printf("1. Add Product\n");
         printf("2. Update Product\n");
         printf("3. Delete Product\n");
         printf("4. Search Product\n");
-        printf("5. Sort Products by Price\n");
+        printf("5. Sort Products by Name\n");
         printf("6. Show All Products\n");
+        printf("7. Save Products to File\n");
+        printf("8. Load Products from File\n");
         printf("0. Back to Main Menu\n");
-        printf("---------------------------\n");
+        printf("-----------------------------------\n");
         
-        choice = getValidInt("Enter your choice (0-6): ", 0, 6);
+        choice = getValidInt("Enter your choice (0-8): ", 0, 8);
         
         switch (choice) {
             case 1: {
-                char name[100], category[50];
-                double price;
-                int quantity;
-                getString("Enter Product Name: ", name, 100);
-                price = getValidFloat("Enter Price (min $0.01): ", 0.01f);
-                quantity = getValidInt("Enter Quantity (1-99999): ", 1, 99999);
-                getString("Enter Category: ", category, 50);
-                if (addProduct(&productMgr, name, price, quantity, category)) {
-                    printf("Product added successfully! (ID: %d)\n", productMgr.count);
+                char name[100], devID[10], version[20], platform[50];
+                getString("Enter Product Name (e.g., Portfolio Manager): ", name, 100);
+                
+                // Nhap va validate Developer ID
+                do {
+                    getString("Enter Developer ID (DEVxxx): ", devID, 10);
+                    if (!isExistingDevID(devID)) {
+                        printf("Error: Developer ID '%s' does not exist.\n", devID);
+                    } else {
+                        break;
+                    }
+                } while (1);
+                
+                getString("Enter Version (e.g., 1.0.0): ", version, 20);
+                getString("Enter Platform (Web/Mobile/Desktop): ", platform, 50);
+                
+                if (addProduct(&productMgr, name, devID, version, platform)) {
+                    printf("Software product added successfully! (ID: %d)\n", productMgr.count);
                 } else {
                     printf("Error: Failed to add product.\n");
                 }
@@ -40,15 +51,14 @@ void productMenu() {
             }
             case 2: {
                 int id;
-                double newPrice;
-                int newQty;
+                char newVersion[20], newPlatform[50];
                 id = getValidInt("Enter Product ID to update: ", 1, 99999);
-                newPrice = getValidFloat("Enter new Price (min $0.01): ", 0.01f);
-                newQty = getValidInt("Enter new Quantity (1-99999): ", 1, 99999);
-                if (updateProduct(&productMgr, id, newPrice, newQty)) {
+                getString("Enter new Version (e.g., 2.0.0): ", newVersion, 20);
+                getString("Enter new Platform (Web/Mobile/Desktop): ", newPlatform, 50);
+                if (updateProduct(&productMgr, id, newVersion, newPlatform)) {
                     printf("Product updated successfully!\n");
                 } else {
-                    printf("Error: Product not found or already deleted.\n");
+                    printf("Error: Product not found or already discontinued.\n");
                 }
                 break;
             }
@@ -56,9 +66,9 @@ void productMenu() {
                 int id;
                 id = getValidInt("Enter Product ID to delete: ", 1, 99999);
                 if (deleteProduct(&productMgr, id)) {
-                    printf("Product deleted successfully!\n");
+                    printf("Product discontinued successfully!\n");
                 } else {
-                    printf("Error: Product not found or already deleted.\n");
+                    printf("Error: Product not found or already discontinued.\n");
                 }
                 break;
             }
@@ -70,36 +80,52 @@ void productMenu() {
             }
             case 5:
                 sortProduct(&productMgr);
-                printf("Products sorted by price (ascending).\n");
+                printf("Products sorted by name (A-Z).\n");
                 // Show sorted results
                 for (int i = 0; i < productMgr.count; i++) {
                     if (productMgr.products[i].status == 1) {
-                        printf("%d. ID: %d | %s | $%.2f | Qty: %d | %s\n",
+                        printf("%d. ID: %d | %s | Dev: %s | Ver: %s | %s\n",
                                i + 1, productMgr.products[i].id,
                                productMgr.products[i].name,
-                               productMgr.products[i].price,
-                               productMgr.products[i].quantity,
-                               productMgr.products[i].category);
+                               productMgr.products[i].devID,
+                               productMgr.products[i].version,
+                               productMgr.products[i].platform);
                     }
                 }
                 break;
             case 6:
                 if (productMgr.count == 0) {
-                    printf("No products found.\n");
+                    printf("No software products found.\n");
                 } else {
-                    printf("\n--- All Products ---\n");
+                    printf("\n--- All Software Products ---\n");
                     for (int i = 0; i < productMgr.count; i++) {
                         if (productMgr.products[i].status == 1) {
-                            printf("ID: %d | %s | $%.2f | Qty: %d | %s\n",
+                            printf("ID: %d | %s | Dev: %s | Ver: %s | %s\n",
                                    productMgr.products[i].id,
                                    productMgr.products[i].name,
-                                   productMgr.products[i].price,
-                                   productMgr.products[i].quantity,
-                                   productMgr.products[i].category);
+                                   productMgr.products[i].devID,
+                                   productMgr.products[i].version,
+                                   productMgr.products[i].platform);
                         }
                     }
                 }
                 break;
+            case 7:
+                if (saveProductToFile(&productMgr, "products.csv")) {
+                    printf("Products saved to file successfully!\n");
+                } else {
+                    printf("Error: Failed to save products to file.\n");
+                }
+                break;
+            case 8: {
+                int prevCount = productMgr.count;
+                if (loadProductFromFile(&productMgr, "products.csv")) {
+                    printf("Loaded %d product(s) from file.\n", productMgr.count - prevCount);
+                } else {
+                    printf("Error: Failed to load products from file.\n");
+                }
+                break;
+            }
             case 0:
                 printf("Returning to main menu...\n");
                 break;
