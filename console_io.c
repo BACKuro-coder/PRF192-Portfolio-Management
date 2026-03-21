@@ -18,6 +18,8 @@ void printMenu() {
     printf("  9. Group Projects by Developer\n");
     printf("  --- Product ---\n");
     printf(" 10. Product Management\n");
+    printf("      (Add, Update, Delete, Search,\n");
+    printf("       Sort, Show All, Save/Load File)\n");
     printf("  --- System ---\n");
     printf("  0. Save and Exit\n");
     printf("=============================================================\n");

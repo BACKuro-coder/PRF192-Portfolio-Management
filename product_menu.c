@@ -17,10 +17,12 @@ void productMenu() {
         printf("4. Search Product\n");
         printf("5. Sort Products by Name\n");
         printf("6. Show All Products\n");
+        printf("7. Save Products to File\n");
+        printf("8. Load Products from File\n");
         printf("0. Back to Main Menu\n");
         printf("-----------------------------------\n");
         
-        choice = getValidInt("Enter your choice (0-6): ", 0, 6);
+        choice = getValidInt("Enter your choice (0-8): ", 0, 8);
         
         switch (choice) {
             case 1: {
@@ -108,6 +110,22 @@ void productMenu() {
                     }
                 }
                 break;
+            case 7:
+                if (saveProductToFile(&productMgr, "products.csv")) {
+                    printf("Products saved to file successfully!\n");
+                } else {
+                    printf("Error: Failed to save products to file.\n");
+                }
+                break;
+            case 8: {
+                int prevCount = productMgr.count;
+                if (loadProductFromFile(&productMgr, "products.csv")) {
+                    printf("Loaded %d product(s) from file.\n", productMgr.count - prevCount);
+                } else {
+                    printf("Error: Failed to load products from file.\n");
+                }
+                break;
+            }
             case 0:
                 printf("Returning to main menu...\n");
                 break;
